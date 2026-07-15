@@ -31,7 +31,7 @@ english_word = current_card[1]
 st.title("Vocab Trainer")
 st.write(f"### Word: {german_word}")
 
-# --- STEP 4: THE STATE-BASED LOGIC ---
+#THE STATE-BASED LOGIC
 
 if not st.session_state.revealed:
     # State is HIDDEN: Show the reveal button
