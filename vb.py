@@ -22,7 +22,6 @@ def load_vocab():
 vocab_list = load_vocab()
 
 #get the current card based on the index in the session state
-# Get the current card based on our session state index
 current_card = vocab_list[st.session_state.index]
 german_word = current_card[0]
 english_word = current_card[1]
