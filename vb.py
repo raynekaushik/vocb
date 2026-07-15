@@ -1,0 +1,49 @@
+import streamlit as st
+import csv
+
+# Initialize your state variables so they persist across reruns
+if "index" not in st.session_state:
+    st.session_state.index = 0  # Track which card we are on
+
+if "revealed" not in st.session_state:
+    st.session_state.revealed = False  # Track if the translation is visible
+    
+# Write a function to load the vocab list
+def load_vocab():
+    vocab = []
+    with open('vocab.csv', newline='', encoding='utf-8') as f:
+        reader = csv.reader(f, delimiter='\t')
+        for row in reader:
+            if len(row) >= 2:
+                vocab.append(row)
+    return vocab
+
+# Store the list in a variable
+vocab_list = load_vocab()
+
+#get the current card based on the index in the session state
+# Get the current card based on our session state index
+current_card = vocab_list[st.session_state.index]
+german_word = current_card[0]
+english_word = current_card[1]
+
+# Display the German word
+st.title("Vocab Trainer")
+st.write(f"### Word: {german_word}")
+
+# --- STEP 4: THE STATE-BASED LOGIC ---
+
+if not st.session_state.revealed:
+    # State is HIDDEN: Show the reveal button
+    if st.button("Reveal Translation"):
+        st.session_state.revealed = True
+        st.rerun()
+
+else:
+    # State is REVEALED: Show the actual translation and the "Next" button
+    st.write(f"### Translation: {english_word}")
+    
+    if st.button("Next"):
+        st.session_state.index += 1
+        st.session_state.revealed = False  # Reset for the next card!
+        st.rerun()
