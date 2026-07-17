@@ -1,5 +1,4 @@
 import csv
-import streamlit as st
 
 vocab_list = []
 with open('vocab.csv', newline='', encoding='utf-8') as f:
