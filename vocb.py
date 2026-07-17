@@ -15,3 +15,4 @@ with open('vocab.csv', newline='', encoding='utf-8') as f:
             vocab_list.append(card)
     print(vocab_list)
 
+

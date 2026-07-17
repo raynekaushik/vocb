@@ -46,3 +46,17 @@ else:
         st.session_state.index += 1
         st.session_state.revealed = False  # Reset for the next card!
         st.rerun()
+
+#if clicked got wrong the inext will be recorded and sent in a seperate list 
+if st.button("I got it wrong"):
+    #store the wrong answers in a separate list in session state
+    if "wrong_answers" not in st.session_state:
+        st.session_state.wrong_answers = []
+    
+    st.session_state.wrong_answers.append(current_card)
+    st.session_state.index += 1
+    st.session_state.revealed = False  # Reset for the next card
+    st.rerun()       
+
+#Next feature after the innitial list ends, the session_state.wrong_answers starts and 
+#when it ends the session reverts to the initial list
