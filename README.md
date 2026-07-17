@@ -1,7 +1,16 @@
-VOCB
+# Vocabulary builder
 
-A simple german vocabulary trainer in python using streamlit based on dict.cc and use the same format of import and really barebones as of now...
+A simple vocabulary trainer I made to help with my german learning.
+As of now it is very barebones and I am using Python with streamlit, initially I had a plan to use Java but I realiased it would be easier to conjure Goethe himself instead...
+Basing this on dict.cc and using the same format of their lists for seamless transitioning, also want to put Leitner system but lets see what happens.
 
-Dependencies
 
-Streamlit
+## Files
+vb.py (streamlit vocabular trainer)
+vocb.py (parser)
+vocab.csv (list using dict.cc format)
+
+## Dependencies
+streamlit
+*run with python -m streamlit run ..../vb.py*
+
