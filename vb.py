@@ -7,7 +7,13 @@ if "index" not in st.session_state:
 
 if "revealed" not in st.session_state:
     st.session_state.revealed = False  # Track if the translation is visible
-    
+
+if "review_mode" not in st.session_state:
+    st.session_state.review_mode = False # Review mode to change lists
+
+if "wrong_answers" not in st.session_state:
+    st.session_state.wrong_answers = []
+
 # Write a function to load the vocab list
 def load_vocab():
     vocab = []
@@ -18,8 +24,27 @@ def load_vocab():
                 vocab.append(row)
     return vocab
 
-# Store the list in a variable
-vocab_list = load_vocab()
+main_vocab = load_vocab()
+
+if st.session_state.review_mode:
+    vocab_list = st.session_state.wrong_answers
+else:
+    vocab_list = main_vocab
+
+# Check BEFORE accessing the list
+if st.session_state.index >= len(vocab_list):
+
+    if (
+        not st.session_state.review_mode
+        and "wrong_answers" in st.session_state
+        and len(st.session_state.wrong_answers) > 0
+    ):
+        st.session_state.review_mode = True
+        st.session_state.index = 0
+        st.rerun()
+
+    st.write("Finished!")
+    st.stop()
 
 #get the current card based on the index in the session state
 current_card = vocab_list[st.session_state.index]
@@ -60,3 +85,13 @@ if st.button("I got it wrong"):
 
 #Next feature after the innitial list ends, the session_state.wrong_answers starts and 
 #when it ends the session reverts to the initial list
+
+if st.session_state.index >= len(vocab_list):
+
+    if not st.session_state.review_mode and len(st.session_state.wrong_answers) > 0:
+        st.session_state.review_mode = True
+        st.session_state.index = 0
+        st.rerun()
+
+    st.write("Finished!")
+    st.stop()
