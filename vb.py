@@ -55,6 +55,10 @@ english_word = current_card[1]
 st.title("Vocab Trainer")
 st.write(f"### Word: {german_word}")
 
+#Displaying the number of cards left
+cards_left = len(vocab_list) - st.session_state.index
+st.caption(f"Cards remaining in this round: {cards_left}")
+
 #THE STATE-BASED LOGIC
 
 if not st.session_state.revealed:
